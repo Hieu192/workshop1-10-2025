@@ -1,74 +1,65 @@
 ---
-title : "Tạo EventBridge Rule"
+title : "Chuẩn bị Trung tâm điều phối (Amazon EventBridge)"
 date :  "2024-10-27" 
-weight : 2 
+weight : 2
 chapter : false
 pre : " <b> 3.2 </b> "
 ---
 
-#### Tạo database instance
+#### EventBridge Rule là gì 
+SQS là viết tắt của Amazon Simple Queue Service – một dịch vụ hàng đợi tin nhắn (message queue) được quản lý hoàn toàn bởi AWS. Nó là dịch vụ cho phép bạn gửi, lưu trữ và nhận tin nhắn giữa các thành phần phần mềm một cách bất đồng bộ (asynchronous), mà không cần các thành phần phải chạy cùng lúc hoặc biết vị trí của nhau.
 
-1. Trong giao diện Amazon RDS, chọn **Databases** ở sidebar sau đó click **Create database**
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/01.png?width=50pc)
+#### Mục tiêu
+1. Nhập **SQS** và truy cập vào dịch vụ **Simple Queue Service**
+![](/workshop01-AWS-FCJ-2025/images/3-1/01.png?width=50pc)
 
-2. Ở giao diện Create database:
-   - **Creation method** chọn **Standard create**
-   - **Engine type** chọn **MySQL**
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/02.png?width=50pc)
+2. Ở giao diện **Amazon SQS**, chọn **Create queue**
+![](/workshop01-AWS-FCJ-2025/images/3-1/02.png?width=50pc)
 
-3. **Templates** chọn **Dev/Test**, **Deployment options** chọn **Multi-AZ DB instance** (để tạo ra instance chính ở AZ hiện tại, và một clone instance ở AZ còn lại đã define trong db subnet group phòng failover)
-→ Cách triển khai này sẽ best practice vì đáp ứng tiêu chí High availability và Data redundancy
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/03.png?width=50pc)
-- Nhưng chúng ta có thể chọn option khác là **Free tier** để vừa phù hợp với scope của bài toán, vừa tiết kiệm chi phí
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/04.png?width=50pc)
+3. Ở giao diện tạo queue:
+   - Type chọn **Standard**
+   - Name nhập: **`OrderingQueue1`**
+   - Kéo xuống và nhấn **Create queue**
+![](/workshop01-AWS-FCJ-2025/images/3-1/03.png?width=50pc)
 
-4. Ở phần Settings:
-   - **DB instance identifier** điền **`database-1`**
-   - **Master username** điền **`admin`**
-   - **Master password** điền **`12345678`**
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/05.png?width=50pc)
 
-5. Ở phần Connectivity:
-   - **Computer resource** chọn **Dont connect to EC2**
-   - **VPC** chọn **my-vpc**
-   - **DB subnet group** chọn **db-subnet-group** ta đã tạo
-   - **Public access** chọn **No** (chọn **Yes** nếu muốn test connection từ public network)
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/06.png?width=50pc)
-   - **VPC SG** chọn **Choose existing**
-   - **Existing VPC SG** chọn **DataTier-SG**
-   - **AZ** chọn **ap-southeast-1a**
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/07.png?width=50pc)
-6. Ở phần **Additional configuration**, điền db name là **`demodb`** (**master name: admin, pass: 12345678**)
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/08.png?width=50pc)
+4. Hoàn thành tạo SQS.
+![](/workshop01-AWS-FCJ-2025/images/3-1/04.png?width=50pc)
 
-7. Kéo xuống dưới cùng và chọn **Create database**:
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/09.png?width=50pc)
+#### Thực hành
+1. Truy cập AWS Console, nhập **EventBridge** và truy cập vào dịch vụ **Amazon EventBridge**
+![](/workshop01-AWS-FCJ-2025/images/3-2/01.png?width=50pc)
 
-8. Hoàn thành tạo database instance
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/10.png?width=50pc)
-#### Config lại để test connection từ public network
-{{% notice note %}}
-Để có thể test connection tới endpoint của db vừa tạo từ public network, ta phải config lại một số thứ như sau (sau khi test xong nhớ trả tất cả về trạng thái ban đầu)
-   - Vào route table **private-db-route-table**, thêm một route mới với destination là **0.0.0.0/0** và target là **internet gateway** ta đã tạo
-   - Vào security group **DataTier-SG**, thêm một inbound rule mới cho phép All traffic truy cập
-   - Cập nhật lại trạng thái của **Public access** ở phần **Connectivity** trong db instance từ **No** thành **Yes**
-{{% /notice %}}
+2. Từ giao diện, chọn **Rule** ở slider bên trái và click **Create rule**
+![](/workshop01-AWS-FCJ-2025/images/3-2/02.png?width=50pc)
 
-#### Test connection tới endpoint của db instance vừa tạo
-1. Vào phần mềm **MySQL Workbench**, tạo connect mới:
-   - **Connection Name** điền **`db-ws-01`** 
-   - **Hostname** copy và paste **endpoint** của db instance vừa tạo
-   - **Port** điền **`3306`**
-   - **Username** điền **`admin`**
-   - **Password** click **Store in Vault** rồi nhập **`12345678`**
-   - Sau cùng, nhấn **Test Connection**
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/11.png?width=50pc)
+3. Từ giao diện Create rule
+   - Name nhập: **`CheckoutToOrderingRule1`**
+   - Click **Next**
+![](/workshop01-AWS-FCJ-2025/images/3-2/03.png?width=50pc)
 
-2. Test connection thành công
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/12.png?width=50pc)
+4. Trong bước Build event pattern
+   - Event source chọn **Other**
+   - Event pattern chọn **Custom pattern (JSON editor)**
+   - Click **Next**
 
-3. Vào file **application.properties** và config lại **datasource url**, **username** và **password** như hình dưới
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/13.png?width=50pc)
+```json
+{
+  "source": ["com.ecommerce.basket"],
+  "detail-type": ["CheckoutEvent"]
+}
+```
+![](/workshop01-AWS-FCJ-2025/images/3-2/04.png?width=50pc)
 
-4. Run app và check trong connection vừa tạo trong MySQL, ta thấy các table đã được auto generate nhờ vào cơ chế **code first** (chỉ để test vì trong workshop này chúng ta sẽ sử dụng **database first**)
-![create db instance](/workshop01-AWS-FCJ-2025/images/3-2/14.png?width=40pc)
+5. Trong bước Select target
+   - Target type chọn **AWS service**
+   - Select a target chọn **SQS queue**
+   - Queue chọn **OrderingQueue1**
+   - Click **Next**
+![](/workshop01-AWS-FCJ-2025/images/3-2/05.png?width=50pc)
+
+6. Kiểm tra lại và click **Create rule**
+![](/workshop01-AWS-FCJ-2025/images/3-2/06.png?width=50pc)
+
+7. Tạo thành công EventBridge Rule bằng cách check **Status** là **Enabled**
+![](/workshop01-AWS-FCJ-2025/images/3-2/07.png?width=50pc)

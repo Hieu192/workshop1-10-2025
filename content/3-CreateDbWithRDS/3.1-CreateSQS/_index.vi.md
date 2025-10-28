@@ -10,7 +10,7 @@ pre : " <b> 3.1 </b> "
 SQS là viết tắt của Amazon Simple Queue Service – một dịch vụ hàng đợi tin nhắn (message queue) được quản lý hoàn toàn bởi AWS. Nó là dịch vụ cho phép bạn gửi, lưu trữ và nhận tin nhắn giữa các thành phần phần mềm một cách bất đồng bộ (asynchronous), mà không cần các thành phần phải chạy cùng lúc hoặc biết vị trí của nhau.
 
 #### Tạo SQS
-1. Nhập **SQS** và truy cập vào dịch vụ **Simple Queue Service**
+1. Truy cập AWS Console, nhập **SQS** và truy cập vào dịch vụ **Simple Queue Service**
 ![](/workshop01-AWS-FCJ-2025/images/3-1/01.png?width=50pc)
 
 2. Ở giao diện **Amazon SQS**, chọn **Create queue**
