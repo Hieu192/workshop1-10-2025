@@ -164,7 +164,6 @@ We will create custom policies with minimal required permissions, then create ro
    - Attach policy: **OrderingLambdaPolicy**
 
 ### Verification
-
 After completion, you will have:
 - 3 custom policies with minimal required permissions
 - 3 corresponding IAM roles for each Lambda function
