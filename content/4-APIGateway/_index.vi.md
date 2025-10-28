@@ -1,5 +1,5 @@
 ---
-title : "Triển khai App Tier"
+title : "Triển khai API Gateway"
 date :  "2024-10-27" 
 weight : 4 
 chapter : false
