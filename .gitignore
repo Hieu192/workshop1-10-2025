@@ -1,4 +1,5 @@
 # Hugo build output
+public/
 resources/
 
 # OS generated files
