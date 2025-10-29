@@ -42,7 +42,7 @@ Trong bước này, chúng ta sẽ tạo các bảng DynamoDB cần thiết cho 
 
 2. Cấu hình bảng:
    - Table name: **`OrderingTable`**
-   - Partition key: **`userId`** (String)
+   - Partition key: **`orderId`** (String)
 
 ![](/workshop01-AWS-FCJ-2025/images/2-1/05.png?featherlight=false&width=50pc)
 

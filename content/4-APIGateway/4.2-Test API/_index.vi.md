@@ -70,4 +70,6 @@ pre : " <b> 4.2 </b> "
     - Ta thấy được log lambda thấy được SQS và lưu vào dynamoDB thành công.
     ![connect ec2](/workshop01-AWS-FCJ-2025/images/4-2/13.png?width=50pc)
 6. Kiểm tra bảng OrderingTable 
+    - Ta thấy được OrderingTable đã được tạo thành công bằng cách kích hoạt Lambda function OrderingFunction1 từ SQS.
 ![connect ec2](/workshop01-AWS-FCJ-2025/images/4-2/14.png?width=50pc)
+

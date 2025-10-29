@@ -93,7 +93,7 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
             ],
             "Resource": [
                "arn:aws:dynamodb:*:*:table/OrderingTable",
-            	"arn:aws:dynamodb:*:*:table/Ordering/index/UserOrdersIndex"
+            	"arn:aws:dynamodb:*:*:table/OrderingTable/index/UserOrdersIndex"
             ]
         },
     ]

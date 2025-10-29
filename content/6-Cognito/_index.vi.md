@@ -1,5 +1,5 @@
 ---
-title : "Triển khai Web Tier"
+title : "Triển khai Cognito để bảo vệ API"
 date :  "2024-10-27" 
 weight : 6
 chapter : false
