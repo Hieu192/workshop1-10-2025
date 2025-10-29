@@ -13,15 +13,15 @@ Trong bước này, chúng ta sẽ tạo các bảng DynamoDB cần thiết cho 
 
 1. Truy cập AWS Console và điều hướng đến dịch vụ **DynamoDB**.
 
-![](/workshop01-AWS-FCJ-2025/images/2-1/01.png?featherlight=false&width=50pc)
+![](mages/2-1/01.png?featherlight=false&width=50pc)
 
 2. Từ giao diện DynamoDB, click **Create table**.
-![](/workshop01-AWS-FCJ-2025/images/2-1/02.png?featherlight=false&width=50pc)
+![](mages/2-1/02.png?featherlight=false&width=50pc)
 3. Tạo bảng ProductTable
    - Table name nhập: **`ProductTable`**
    - Partition key nhập: **`productId`** (String)
 
-![](/workshop01-AWS-FCJ-2025/images/2-1/03.png?featherlight=false&width=50pc)
+![](mages/2-1/03.png?featherlight=false&width=50pc)
 
 4. Giữ các cài đặt khác mặc định và click **Create table**.
 
@@ -31,7 +31,7 @@ Trong bước này, chúng ta sẽ tạo các bảng DynamoDB cần thiết cho 
    - Table name nhập: **`BasketTable`**
    - Partition key: **`userId`** (String)
 
-![](/workshop01-AWS-FCJ-2025/images/2-1/04.png?featherlight=false&width=50pc)
+![](mages/2-1/04.png?featherlight=false&width=50pc)
 
 2. Giữ các cài đặt khác mặc định và click **Create table**.
 
@@ -43,9 +43,9 @@ Trong bước này, chúng ta sẽ tạo các bảng DynamoDB cần thiết cho 
    - Table name: **`OrderingTable`**
    - Partition key: **`orderId`** (String)
 
-![](/workshop01-AWS-FCJ-2025/images/2-1/05.png?featherlight=false&width=50pc)
+![](mages/2-1/05.png?featherlight=false&width=50pc)
 
 3. Giữ các cài đặt khác mặc định và click **Create table**.
 
 4. Đợi tất cả các bảng được tạo thành công và có dạng như hình dưới với Status là **Active**.
-![](/workshop01-AWS-FCJ-2025/images/2-1/06.png?featherlight=false&width=50pc)
+![](mages/2-1/06.png?featherlight=false&width=50pc)

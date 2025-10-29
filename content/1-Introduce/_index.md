@@ -16,7 +16,7 @@ The system is designed based on the **Serverless Microservices Architecture** on
 
 Each microservice operates independently and is fully implemented using serverless services such as **API Gateway**, **AWS Lambda**, and **Amazon DynamoDB**.
 
-![](/workshop01-AWS-FCJ-2025/images/1/image.png?featherlight=false&width=50pc)
+![](mages/1/image.png?featherlight=false&width=50pc)
 
 **System Workflow:**
 1. The **User** accesses the application and signs in through **Amazon Cognito**, the authentication and user management service provided by AWS.  

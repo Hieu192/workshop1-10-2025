@@ -12,7 +12,7 @@ chapter : false
 Trong bài workshop này, chúng ta sẽ cùng nhau xây dựng một hệ thống xử lý đơn hàng đơn giản theo kiến trúc microservice trên nền tảng AWS Serverless.
 
 
-![Architecture diagram](/workshop01-AWS-FCJ-2025/images/1/image.png?width=60pc)
+![Architecture diagram](mages/1/image.png?width=60pc)
 
 #### Nội dung
 
