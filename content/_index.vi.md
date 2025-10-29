@@ -18,11 +18,9 @@ Trong bài workshop này, chúng ta sẽ cùng nhau xây dựng một hệ thố
 
 1. [Giới thiệu](1-introduce/)
 2. [Các bước chuẩn bị](2-PreparationSteps/)
-3. [Tạo database với RDS ](3-CreateDbWithRDS/) 
-4. [Triển khai App tier](4-DeployAppTier/)
-5. [Tạo Internal LB và ASG](5-CreateInternalLbAndASG/)
-6. [Triển khai Web tier](6-DeployWebTier/)
-7. [Tạo External LB và ASG](7-CreateExternalLbAndASG/)
-8. [Demo web sau khi deploy thành công](8-DemoWeb/)
-9. [Dọn dẹp tài nguyên](9-CleanUpResources/)
+3. [Luồng xử lý order](3-ProcessOrderHandler/) 
+4. [API Gateway](4-APIGateway/)
+5. [Các bước tối ưu](5-StepOptimal/)
+6. [Cognito](6-Cognito/)
+7. [Xóa tài nguyên](7-CleanUpResource/)
 

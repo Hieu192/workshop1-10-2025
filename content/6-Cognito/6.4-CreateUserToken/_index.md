@@ -1,9 +1,9 @@
 ---
 title : "Create EC2 instance"
 date : "2024-10-27"
-weight : 3
+weight : 4
 chapter : false
-pre : " <b> 6.3 </b> "
+pre : " <b> 6.4 </b> "
 ---
 
 #### Create EC2 instance
