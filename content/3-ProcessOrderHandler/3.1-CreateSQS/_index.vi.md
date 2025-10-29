@@ -11,17 +11,17 @@ SQS là viết tắt của Amazon Simple Queue Service – một dịch vụ hà
 
 #### Tạo SQS
 1. Truy cập AWS Console, nhập **SQS** và truy cập vào dịch vụ **Simple Queue Service**
-![](images/3-1/01.png?width=50pc)
+![](/images/3-1/01.png?width=50pc)
 
 2. Ở giao diện **Amazon SQS**, chọn **Create queue**
-![](images/3-1/02.png?width=50pc)
+![](/images/3-1/02.png?width=50pc)
 
 3. Ở giao diện tạo queue:
    - Type chọn **Standard**
    - Name nhập: **`OrderingQueue1`**
    - Kéo xuống và nhấn **Create queue**
-![](images/3-1/03.png?width=50pc)
+![](/images/3-1/03.png?width=50pc)
 
 
 4. Hoàn thành tạo SQS.
-![](images/3-1/04.png?width=50pc)
+![](/images/3-1/04.png?width=50pc)

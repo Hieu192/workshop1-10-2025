@@ -12,14 +12,14 @@ pre : " <b> 6.4 </b> "
 #### Thực hành
 1. Truy cập dịch vụ Cognito, click vào User Pool của bạn
 2. Click vào tab **Users**
-![](images/6-4/01.png?width=50pc)
+![](/images/6-4/01.png?width=50pc)
     - Nhập email của bạn 
     - Nhập mật khẩu
-![](images/6-4/02.png?width=50pc)
+![](/images/6-4/02.png?width=50pc)
     - Kết quả
-![](images/6-4/03.png?width=50pc)
+![](/images/6-4/03.png?width=50pc)
     - Để có thể đăng nhập bằng user, password chúng ta cần bật như ảnh dưới 
-![](images/6-4/04.png?width=50pc)
+![](/images/6-4/04.png?width=50pc)
 
 2. Lấy id-token từ cli để sử dụng api
     - Nhập lệnh sau
@@ -29,20 +29,20 @@ pre : " <b> 6.4 </b> "
     --auth-parameters USERNAME=[YOUR_USER],PASSWORD=[YOUR_PASS] \
     --region ap-southeast-1
     ```
-![](images/6-4/05.png?width=50pc)
+![](/images/6-4/05.png?width=50pc)
     - Tiếp tục nhập lệnh để đổi mật khẩu lần đầu
     ```bash
     aws cognito-idp respond-to-auth-challenge --challenge-name NEW_PASSWORD_REQUIRED --client-id 3i5aerjeech7l3kir5j8gkqs3t --challenge-responses USERNAME=hieuthptchuyenbl@gmail.com,NEW_PASSWORD=123456Aa@ --session "[DÁN_CHUỖI_SESSION]" --region ap-southeast-1
     ```
-![](images/6-4/06.png?width=50pc)
+![](/images/6-4/06.png?width=50pc)
 
 3. Copy Id-token đó rồi dán vào Postman như ảnh dưới
     - Cột Key nhập **`Authorization`**
     - Cột Value nhập Id-token của bạn
     - Click send và api đã phản hồi
-![](images/6-4/07.png?width=50pc)
+![](/images/6-4/07.png?width=50pc)
 
     - Tương tự với api khác
-![](images/6-4/08.png?width=50pc)
+![](/images/6-4/08.png?width=50pc)
     
 
