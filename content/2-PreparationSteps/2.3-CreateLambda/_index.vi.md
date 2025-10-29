@@ -12,10 +12,10 @@ Trong bước này, chúng ta sẽ tạo các Lambda function cho microservices.
 ### Tạo ProductFunction1
 
 1. Truy cập AWS Console và điều hướng đến dịch vụ **Lambda** trong AWS Console.
-![](mages/2-3/01.png?featherlight=false&width=50pc)
+![](images/2-3/01.png?featherlight=false&width=50pc)
 
 2. Từ slider bên trái chọn **Functions** và click **Create function**.
-![](mages/2-3/02.png?featherlight=false&width=50pc)
+![](images/2-3/02.png?featherlight=false&width=50pc)
 
 3. Cấu hình function:
    - Chọn **Author from scratch**
@@ -24,7 +24,7 @@ Trong bước này, chúng ta sẽ tạo các Lambda function cho microservices.
    - Architecture: **arm64**
    - Execution role: **Use an existing role** → **ProductLambdaRole1**
    - Click **Create function**.
-![](mages/2-3/03.png?featherlight=false&width=50pc)
+![](images/2-3/03.png?featherlight=false&width=50pc)
 
 
 4. Thay thế code mặc định bằng:
@@ -91,7 +91,7 @@ export const handler = async (event) => {
 };
 ```
 5. Click **Deploy**.
-![](mages/2-3/04.png?featherlight=false&width=50pc)
+![](images/2-3/04.png?featherlight=false&width=50pc)
 
 ### Tạo BasketFunction1
 
@@ -100,7 +100,7 @@ export const handler = async (event) => {
    - Runtime: **Node.js 22.x**
    - Architecture: **arm64**
    - Execution role: **BasketLambdaRole1**
-![](mages/2-3/05.png?featherlight=false&width=50pc)
+![](images/2-3/05.png?featherlight=false&width=50pc)
 
 2. Thay thế code bằng:
 
@@ -188,7 +188,7 @@ export const handler = async (event) => {
 ```
 
 3. Click **Deploy**.
-![](mages/2-3/06.png?featherlight=false&width=50pc)
+![](images/2-3/06.png?featherlight=false&width=50pc)
 
 ### Tạo OrderingFunction1
 
@@ -197,7 +197,7 @@ export const handler = async (event) => {
    - Runtime: **Node.js 22.x**
    - Architecture: **arm64**
    - Execution role: **OrderingLambdaRole**
-![](mages/2-3/07.png?featherlight=false&width=50pc)
+![](images/2-3/07.png?featherlight=false&width=50pc)
 
 2. Thay thế code bằng:
 
@@ -292,8 +292,8 @@ export const handler = async (event) => {
 ```
 
 3. Click **Deploy**.
-![](mages/2-3/08.png?featherlight=false&width=50pc)
+![](images/2-3/08.png?featherlight=false&width=50pc)
 
 Tất cả Lambda functions đã được tạo thành công!
 
-![](mages/2-3/09.png?featherlight=false&width=50pc)
+![](images/2-3/09.png?featherlight=false&width=50pc)

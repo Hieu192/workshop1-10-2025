@@ -15,54 +15,54 @@ Mục tiêu của phần thực hành là tạo và cấu hình REST API trên A
 #### Thực hành
 
 1. Truy cập AWS Console, nhập **API Gateway** và truy cập vào dịch vụ **API Gateway**
-![Git Bash](mages/4-1/01.png?width=50pc)
+![Git Bash](images/4-1/01.png?width=50pc)
 2. Chọn **APIs** ở sidebar bên trái, sau đó click **Create API**
-![Git Bash](mages/4-1/02.png?width=50pc)
+![Git Bash](images/4-1/02.png?width=50pc)
 3. Lướt xuống tìm **REST API** rồi click **Build**
-![Git Bash](mages/4-1/03.png?width=50pc)
+![Git Bash](images/4-1/03.png?width=50pc)
 4. Trong giao diện Create REST API
    - Chọn **New API** 
    - API name nhập: **`EcommerceAPI1`**
    - API endpoint type: **Regional**
    - Click **Create API**
-![Git Bash](mages/4-1/04.png?width=50pc)
+![Git Bash](images/4-1/04.png?width=50pc)
 5. Sau khi tạo xong click vào **/** và click tiếp vào **Create resource**
-![Git Bash](mages/4-1/05.png?width=50pc)
+![Git Bash](images/4-1/05.png?width=50pc)
 6. Ở phần Resource name nhập **`products`** và click **Create resource**
-![Git Bash](mages/4-1/06.png?width=50pc)
+![Git Bash](images/4-1/06.png?width=50pc)
 7. Click vào **/products** vừa tạo, click **Create method**
-![Git Bash](mages/4-1/07.png?width=50pc)
+![Git Bash](images/4-1/07.png?width=50pc)
 8. Trong giao diện Method details
    - Method type chọn **GET**
    - Integration type chọn **Lambda function**
    - Click **Lambda proxy integration**
    - Lambda function chọn **ProductFunction1**
 
-![Git Bash](mages/4-1/08.png?width=40pc)
+![Git Bash](images/4-1/08.png?width=40pc)
 9. Hoàn thành tạo một api /products
-![Git Bash](mages/4-1/09.png?width=50pc)
+![Git Bash](images/4-1/09.png?width=50pc)
 
 10. Tạo /basket
-![Git Bash](mages/4-1/10.png?width=50pc)
+![Git Bash](images/4-1/10.png?width=50pc)
 
-![Git Bash](mages/4-1/11.png?width=50pc)
+![Git Bash](images/4-1/11.png?width=50pc)
 11. Tạo /basket/checkout
-![Git Bash](mages/4-1/12.png?width=50pc)
+![Git Bash](images/4-1/12.png?width=50pc)
 
-![Git Bash](mages/4-1/13.png?width=50pc)
+![Git Bash](images/4-1/13.png?width=50pc)
 12. Tạo /orders
-![Git Bash](mages/4-1/14.png?width=50pc)
+![Git Bash](images/4-1/14.png?width=50pc)
 
-![Git Bash](mages/4-1/15.png?width=50pc)
+![Git Bash](images/4-1/15.png?width=50pc)
 
 13. Kết quả
-![Git Bash](mages/4-1/16.png?width=50pc)
+![Git Bash](images/4-1/16.png?width=50pc)
 
 14. Deploy API
    - Click **Deploy API**
-![Git Bash](mages/4-1/17.png?width=50pc)
+![Git Bash](images/4-1/17.png?width=50pc)
 
    - Stage chọn **New stage**
    - Stage name nhập: **`prod`**
    - Click **Deploy**
-![Git Bash](mages/4-1/18.png?width=50pc)
+![Git Bash](images/4-1/18.png?width=50pc)

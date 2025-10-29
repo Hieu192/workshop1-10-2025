@@ -13,8 +13,8 @@ pre : " <b> 6.4 </b> "
     - **Security group** select **WebTier-SG**
     - **Advanced details**, **IAM instance profile** select **ec2role**
     - Finally, select **Launch instance**
-![](mages/6-3/01.png?width=50pc)
-![](mages/6-3/02.png?width=50pc)
+![](images/6-3/01.png?width=50pc)
+![](images/6-3/02.png?width=50pc)
 
 2. Complete creating an EC2 instance for the **web server**
-![](mages/6-3/03.png?width=50pc)
+![](images/6-3/03.png?width=50pc)

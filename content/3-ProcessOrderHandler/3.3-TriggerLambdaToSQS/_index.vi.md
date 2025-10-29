@@ -12,16 +12,16 @@ Cấu hình hàm OrderingFunction1 của chúng ta để nó tự động đư�
 
 #### Thực hành
 1. Truy cập AWS Console, nhập **EventBridge** và truy cập vào dịch vụ **Amazon EventBridge**
-![](mages/2-3/01.png?width=50pc)
+![](images/2-3/01.png?width=50pc)
 
 2. Từ danh sách các hàm lambda, click **OrderingFunction1** và chọn **Add trigger**
-![](mages/3-3/02.png?width=50pc)
+![](images/3-3/02.png?width=50pc)
 
 3. Trong giao diện add trigger
    - Select a source chọn: **SQS**
    - SQS Queue chọn **OrderingQueue1**
    - Click **Add**
-![](mages/3-3/03.png?width=50pc)
+![](images/3-3/03.png?width=50pc)
 
 4. Kiểm tra đã trigger thành công 
-![](mages/3-3/04.png?width=50pc)
+![](images/3-3/04.png?width=50pc)

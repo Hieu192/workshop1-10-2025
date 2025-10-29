@@ -9,7 +9,7 @@ pre : " <b> 3. </b> "
 #### Luồng xử lý bất đồng bộ là gì?
 Luồng xử lý mà người gửi (producer) không cần chờ người nhận (consumer) xử lý xong ngay lập tức, mà tiếp tục hoạt động, còn công việc được xử lý ở nền (background) thông qua cơ chế trung gian (queue, event bus, callback…).
 
-![](mages/3/01.png?featherlight=false&width=50pc)
+![](images/3/01.png?featherlight=false&width=50pc)
 
 #### Nội dung
 

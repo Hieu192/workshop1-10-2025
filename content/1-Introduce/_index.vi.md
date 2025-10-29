@@ -16,7 +16,7 @@ Hệ thống được thiết kế theo mô hình **Serverless Microservices Arc
 
 Mỗi microservice hoạt động độc lập, được triển khai hoàn toàn bằng các dịch vụ serverless như **API Gateway**, **AWS Lambda**, và **Amazon DynamoDB**.
 
-![](mages/1/image.png?featherlight=false&width=50pc)
+![](images/1/image.png?featherlight=false&width=50pc)
 
 **Luồng hoạt động của hệ thống**:
 1. Người dùng (User) truy cập ứng dụng và đăng nhập thông qua **Amazon Cognito**, dịch vụ xác thực và quản lý người dùng của AWS.  

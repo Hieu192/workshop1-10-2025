@@ -21,7 +21,7 @@ pre : " <b> 5.1 </b> "
     - Click **Create queue**
     - Name nhập: **`OrderingQueue1_DLQ`**
     - Để mặc đinh hết, kéo xuống tận cùng và click **Create queue**
-![AMI](mages/5-1/01.png?width=50pc)
+![AMI](images/5-1/01.png?width=50pc)
 
 2. Ở giao diện danh sách hàng đợi SQS, click vào **OrderingQueue1** và click **Edit** ở góc phải
     - Cuộn xuống tìm phần **Dead-letter queue** và click **Enable**
@@ -31,7 +31,7 @@ pre : " <b> 5.1 </b> "
 {{% notice note %}} 
 Maximum receives có nghĩa là Lambda được phép thử xử lý một tin nhắn. Nếu nó báo lỗi (fail), SQS sẽ giữ lại và giao lại sau. Nếu quá trình này "thất bại" tổng cộng 3 lần, SQS sẽ từ bỏ và chuyển tin nhắn đó sang DLQ. {{% /notice %}}
 
-![AMI](mages/5-1/02.png?width=50pc)
+![AMI](images/5-1/02.png?width=50pc)
 
 3. Test thử với DLQ
     - Chúng ta cần phải sửa một chút code lambda function để mô phỏng lỗi để test DLQ
@@ -40,11 +40,11 @@ Maximum receives có nghĩa là Lambda được phép thử xử lý một tin n
         console.log("!!! ĐANG TEST DLQ - CỐ TÌNH GÂY LỖI !!!");
         throw new Error("Đây là lỗi giả lập để test DLQ");
     ```
-    ![AMI](mages/5-1/03.png?width=50pc)
+    ![AMI](images/5-1/03.png?width=50pc)
     - Mở Postman, gọi /basket/checkout 4 lần để test
-    ![AMI](mages/5-1/04.png?width=50pc)
+    ![AMI](images/5-1/04.png?width=50pc)
     - Truy cập lại SQS, và thấy tin nhắn của OrderingQueue có 3 tin nhắn đang chuyển đi, và OrderingQueue1_DLQ đang giữ 1 tin nhắn thành công.
-    ![AMI](mages/5-1/05.png?width=50pc)
+    ![AMI](images/5-1/05.png?width=50pc)
     - Đợi một lúc, tất cả tin nhắn lỗi đã được chuyển thành công an toàn vào DLQ.
 
 4. Xóa code mô phỏng lỗi trên lambda 

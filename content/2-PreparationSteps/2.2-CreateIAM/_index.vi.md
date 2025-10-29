@@ -15,14 +15,14 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
 
 1. Truy cập AWS Console và điều hướng đến dịch vụ **IAM** trong AWS Console.
 
-![](mages/2-2/01.png?featherlight=false&width=50pc)
+![](images/2-2/01.png?featherlight=false&width=50pc)
 
 2. Click **Policies** ở sidebar bên trái, sau đó **Create policy**.
 
-![](mages/2-2/02.png?featherlight=false&width=50pc)
+![](images/2-2/02.png?featherlight=false&width=50pc)
 
 3. Chọn tab **JSON** và paste policy sau:
-![](mages/2-2/03.png?featherlight=false&width=50pc)
+![](images/2-2/03.png?featherlight=false&width=50pc)
 
 ```json
 {
@@ -41,12 +41,12 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
 ```
 
 4. Click **Next**.
-![](mages/2-2/04.png?featherlight=false&width=50pc)
+![](images/2-2/04.png?featherlight=false&width=50pc)
 
 5. Tiếp theo chúng ta nhập như bên dưới
    - Policy name nhập: **`AllowReadProductTablePolicy1`**
    - Nhấn **Create policy**
-![](mages/2-2/05.png?featherlight=false&width=50pc)
+![](images/2-2/05.png?featherlight=false&width=50pc)
 
 6. Click **Create policy**.
 
@@ -71,7 +71,7 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
     ]
 }
 ```
-![](mages/2-2/06.png?featherlight=false&width=50pc)
+![](images/2-2/06.png?featherlight=false&width=50pc)
 
 
 #### Tạo AllowWriteOrderingTablePolicy1
@@ -99,7 +99,7 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
 }
 ```
 
-![](mages/2-2/07.png?featherlight=false&width=50pc)
+![](images/2-2/07.png?featherlight=false&width=50pc)
 
 #### Tạo AllowPutEventsToDefaultBusPolicy1
 
@@ -119,7 +119,7 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
 }
 ```
 
-![](mages/2-2/08.png?featherlight=false&width=50pc)
+![](images/2-2/08.png?featherlight=false&width=50pc)
 
 
 ### Bước 2: Tạo IAM Roles 
@@ -127,16 +127,16 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
 #### Tạo ProductLambdaRole
 
 1. Click **Roles** ở sidebar bên trái, sau đó **Create role**.
-![](mages/2-2/14.png?featherlight=false&width=50pc)
+![](images/2-2/14.png?featherlight=false&width=50pc)
 
 2. Chọn **AWS service** và chọn **Lambda**. Click **Next**.
-![](mages/2-2/09.png?featherlight=false&width=50pc)
+![](images/2-2/09.png?featherlight=false&width=50pc)
 
 4. Tìm và chọn policy: **`AllowReadProductTablePolicy1`**, **`AWSLambdaBasicExecutionRole`** và chọn **Next**
-![](mages/2-2/10.png?featherlight=false&width=50pc)
+![](images/2-2/10.png?featherlight=false&width=50pc)
 
 5. Role name nhập: **`ProductLambdaRole1`**
-![](mages/2-2/11.png?featherlight=false&width=50pc)
+![](images/2-2/11.png?featherlight=false&width=50pc)
 7. Click **Create role**.
 
 #### Tạo BasketLambdaRole
@@ -144,14 +144,14 @@ Chúng ta cần tạo các IAM role cho các Lambda function để truy cập Dy
 1. Lặp lại các bước tương tự với:
    - Role name: **`BasketLambdaRole1`**
    - Gắn policy: **`AllowPutEventsToDefaultBusPolicy1`**, **`AllowReadWriteBasketTablePolicy1`**, **`AWSLambdaBasicExecutionRole`**
-![](mages/2-2/12.png?featherlight=false&width=50pc)
+![](images/2-2/12.png?featherlight=false&width=50pc)
 
 #### Tạo OrderingLambdaRole
 
 1. Lặp lại các bước tương tự với:
    - Role name: **`OrderingLambdaRole1`**
    - Gắn policy: **`AllowWriteOrderingTablePolicy1`**, **`AWSLambdaBasicExecutionRole`**, **`AWSLambdaSQSQueueExecutionRole`**
-![](mages/2-2/13.png?featherlight=false&width=50pc)
+![](images/2-2/13.png?featherlight=false&width=50pc)
 
 ### Xác nhận
 

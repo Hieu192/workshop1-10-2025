@@ -12,23 +12,23 @@ pre : " <b> 5.2 </b> "
 
 #### Tạo Global Secondary Index(GSI)
 1. Tại giao diện DynamoDB, chọn **Table** ở sidebar bên trái, sau đó chọn **OrderingTable**
-![Target group](mages/5-2/01.png?width=50pc)
+![Target group](images/5-2/01.png?width=50pc)
 
 2. Tại giao diện OrderingTable
     - Mở tab Indexs và click.
-![Target group](mages/5-2/02.png?width=50pc)
+![Target group](images/5-2/02.png?width=50pc)
 
 3. Tiếp theo click **Create index**
-![Target group](mages/5-2/03.png?width=50pc)
+![Target group](images/5-2/03.png?width=50pc)
 
 4. Từ giao diện
     - Partition key nhập: **`userId`**
     - Index name: **`UserOrdersIndex`**
     - Attribute projections chọn **All**
-![Target group](mages/5-2/04.png?width=50pc)
+![Target group](images/5-2/04.png?width=50pc)
 
 5. Tiếp theo click **Create index** và chờ đến khi nó active
-![Target group](mages/5-2/05.png?width=50pc)
+![Target group](images/5-2/05.png?width=50pc)
 
 6. Tại giao diện Lambda function OrderingFunction1, hãy sửa code để sử dụng index và click deploy
 ```js
@@ -133,11 +133,11 @@ export const handler = async (event) => {
     };
 };
 ```
-![Target group](mages/5-2/06.png?width=50pc)
+![Target group](images/5-2/06.png?width=50pc)
 
 7. Test API với Postman để kiểm tra tốc độ
     - Test với /orders và xem tốc độ phản hồi
-    ![Target group](mages/5-2/07.png?width=50pc)
+    ![Target group](images/5-2/07.png?width=50pc)
     - Test với /orders?userId=user-test-02 và xem tốc độ phản hồi
-    ![Target group](mages/5-2/08.png?width=50pc)
+    ![Target group](images/5-2/08.png?width=50pc)
     - Từ hình ảnh trên a thấy index thì tốc độ phản hồi nhanh hơn, mặc dù không quá lớn đối với dữ liệu ít (vài chục order). Nhưng khi dữ liệu đến hàng triệu, hàng tỷ thì index này có tốc độ nhanh hơn gấp trăm lần thậm chí có thể hàng nghìn lần.
