@@ -3,7 +3,6 @@
 baseURL = "https://hieu192.github.io/workshop1-10-2025"
 relativeURLs = true
 canonifyURLs = true
-BaseURL = "https://hieu192.github.io/workshop1-10-2025"
 theme = "hugo-theme-learn"
 
 # Ignore warnings
