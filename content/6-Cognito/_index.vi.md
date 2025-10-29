@@ -7,10 +7,17 @@ pre : " <b> 6. </b> "
 ---
 
 #### Giới thiệu
-Trong phần này, chúng ta sẽ tiến hành triển khai Web Tier bằng cách upload mã nguồn của ứng dụng lên **Amazon S3** và triển khai ứng dụng trên **Amazon EC2**. Ngoài ra chúng ta sẽ sử dụng **Nginx** trong workshop này. Nginx sẽ đóng vai trò là 1 **web server** mà chúng ta sẽ config để chạy úng dụng trên **port 80**, cũng như giúp **chuyển hướng API** request từ Web Tier đến App Tier thông qua **Internal Load Balancer**.
+Amazon Cognito là dịch vụ của AWS dùng để xác thực (authentication) và quản lý người dùng (user management) cho ứng dụng web hoặc mobile.
+
+Cognito giúp bạn dễ dàng:
+    - Tạo và lưu trữ tài khoản người dùng trong User Pool.
+    - Hỗ trợ đăng nhập bằng email, số điện thoại, hoặc tài khoản mạng xã hội (Google, Facebook...).
+    - Cung cấp Hosted UI để người dùng đăng ký, đăng nhập mà không cần tự xây dựng trang login.
+    - Tích hợp dễ dàng với API Gateway và AWS Lambda để bảo vệ API bằng JWT token (ID token, Access token).
+Nhờ đó, bạn có thể nhanh chóng thêm tính năng đăng ký, đăng nhập, xác thực bảo mật cho hệ thống microservice mà không cần quản lý server hay cơ sở dữ liệu người dùng thủ công.
 
 #### Nội dung:
-1. [Sửa lại file cấu hình Nginx](6.1-CreateUserPool/)
-2. [Upload mã nguồn ứng dụng lên Amazon S3](6.2-ConfigureAPIGateway/)
-3. [Tạo EC2 Instance](6.3-CreateUssreate/)
-4. [Kết nối tới EC2 Instance](6.4-ConnectToInstance/)
+1. [Tạo user pool](6.1-CreateUserPool/)
+2. [Cấu hình API Gateway](6.2-ConfigureAPIGateway/)
+3. [Cập nhật code lambda](6.3-UpdatecodeLambda/)
+4. [Tạo User Token](6.4-CreateUserToken/)

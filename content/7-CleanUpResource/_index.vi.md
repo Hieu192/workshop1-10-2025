@@ -1,17 +1,14 @@
 ---
-title : "Tạo External Load Balancer và Auto Scaling Group"
+title : "Dọn dẹp tài nguyên"
 date :  "2024-10-27" 
 weight : 7
 chapter : false
 pre : " <b> 7. </b> "
 ---
-#### Giới thiệu
-Ở section này, chúng ta sẽ tạo **External Load Balancer** để cân bằng tải các traffic từ người dùng (internet) tới Web Tier và **Auto Scaling Group** cho Web Tier.
 
-#### Nội dung:
 
-1. [Tạo AMI cho Web Tier](7.1-CreateWebTierAMI)
-2. [Tạo Tartget Group cho Web Tier](7.2-CreateTargetGroup)
-3. [Tạo External Load Balancer](7.3-CreateExternalLoadBalancer)
-4. [Tạo Launch Template cho Web Tier](7.4-CreateLaunchTemplate)
-5. [Tạo Auto Scaling Group](7.5-CreateAutoScalingGroup)
+#### Dọn dẹp tài nguyên
+Chúng ta sẽ tiến hành xóa các tài nguyên theo thứ tự sau:
+
+1. 
+

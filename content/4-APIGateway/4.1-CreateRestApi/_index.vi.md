@@ -7,8 +7,10 @@ pre : " <b> 4.1 </b> "
 ---
 
 #### Rest API là gì
+REST API (Representational State Transfer API) là giao diện cho phép các hệ thống giao tiếp qua HTTP bằng cách trao đổi dữ liệu (thường ở dạng JSON).Giúp các microservice (như Order, Payment, Inventory...) giao tiếp thống nhất, tách biệt logic xử lý, dễ mở rộng và tích hợp với các cơ chế bất đồng bộ như SQS hoặc EventBridge trong hệ thống order.
 
 #### Mục tiêu
+Mục tiêu của phần thực hành là tạo và cấu hình REST API trên Amazon API Gateway, giúp các microservice (như Product, Basket, Order) có thể giao tiếp thông qua HTTP endpoint, phục vụ cho luồng xử lý bất đồng bộ trong Order Microservice.
 
 #### Thực hành
 

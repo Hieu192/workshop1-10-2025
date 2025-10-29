@@ -6,8 +6,6 @@ chapter : false
 pre : " <b> 3.3 </b> "
 ---
 
-#### EventBridge Rule là gì 
-SQS là viết tắt của Amazon Simple Queue Service – một dịch vụ hàng đợi tin nhắn (message queue) được quản lý hoàn toàn bởi AWS. Nó là dịch vụ cho phép bạn gửi, lưu trữ và nhận tin nhắn giữa các thành phần phần mềm một cách bất đồng bộ (asynchronous), mà không cần các thành phần phải chạy cùng lúc hoặc biết vị trí của nhau.
 
 #### Mục tiêu
 Cấu hình hàm OrderingFunction1 của chúng ta để nó tự động được "kích hoạt" (trigger) mỗi khi có tin nhắn mới trong OrderingQueue1.

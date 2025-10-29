@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 2.3 </b> "
 ---
 
-## Tạo Lambda Functions
 
 Trong bước này, chúng ta sẽ tạo các Lambda function cho microservices.
 

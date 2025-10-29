@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 2.1 </b> "
 ---
 
-## Tạo DynamoDB Tables
 
 Trong bước này, chúng ta sẽ tạo các bảng DynamoDB cần thiết cho ứng dụng microservice.
 

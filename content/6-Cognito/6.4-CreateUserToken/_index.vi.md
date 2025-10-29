@@ -6,6 +6,9 @@ chapter : false
 pre : " <b> 6.4 </b> "
 ---
 
+#### Mục tiêu
+- Để có thể sử dụng được api thì chúng ta cần đưa một cái chứng thực (token) để API Gateway biết bạn là ai và cho phép sử dụng nó.
+
 #### Thực hành
 1. Truy cập dịch vụ Cognito, click vào User Pool của bạn
 2. Click vào tab **Users**

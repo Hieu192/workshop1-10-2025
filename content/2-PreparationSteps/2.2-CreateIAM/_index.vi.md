@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 2.2 </b> "
 ---
 
-## Tạo IAM Roles cho Lambda Functions
 
 Chúng ta cần tạo các IAM role cho các Lambda function để truy cập DynamoDB và các dịch vụ AWS khác.
 

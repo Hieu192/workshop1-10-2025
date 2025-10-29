@@ -7,7 +7,7 @@ pre : " <b> 4.2 </b> "
 ---
 
 #### Postman là gì
-
+Postman là công cụ hỗ trợ gửi và kiểm thử API một cách trực quan, giúp nhà phát triển gửi yêu cầu (request) đến các endpoint (như API Gateway) và xem phản hồi (response) từ server, phục vụ cho việc kiểm thử và gỡ lỗi API trong quá trình phát triển hệ thống microservice.
 
 #### Thực hành test api
 1. Tạo dữ liệu productTable trên dynamoDB để test

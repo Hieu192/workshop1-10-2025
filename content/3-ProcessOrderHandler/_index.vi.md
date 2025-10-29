@@ -15,3 +15,4 @@ Luồng xử lý mà người gửi (producer) không cần chờ người nhậ
 
 1. [Tạo SQS](3.1-CreateSQS/)
 2. [Tạo EventBridge](3.2-CreateEventBridgeRule/)
+3. [Kích hoạt Lambda với SQS](3.3-TriggerLambdaToSQS/)
