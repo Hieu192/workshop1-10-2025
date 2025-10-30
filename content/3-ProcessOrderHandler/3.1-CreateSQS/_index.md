@@ -1,31 +1,26 @@
 ---
-title : "Create database subnet group"
-date : "2024-10-27"
-weight : 1
+title : "Create SQS Queue"
+date :  "2024-10-27" 
+weight : 1 
 chapter : false
 pre : " <b> 3.1 </b> "
 ---
-#### What is Database subnet group and why do we need it?
-A database subnet group is a collection of subnets that you create in your VPC. When you create a database instance, you need to specify a database subnet group. The database subnet group must contain at least one subnet in each AZ. The database subnet group ensures that the database instance can be deployed across multiple AZs for high availability.
 
-#### Create database subnet group
-1. Find and access the **RDS** service
-![](images/3-1/01.png?width=50pc)
+#### What is SQS 
+SQS stands for Amazon Simple Queue Service – a message queue service fully managed by AWS. It is a service that allows you to send, store, and receive messages between software components asynchronously, without requiring the components to run simultaneously or know each other's location.
 
-2. Choose **Subnet groups** in the sidebar and click **Create DB subnet group**
-![](images/3-1/02.png?width=50pc)
+#### Create SQS
+1. Access AWS Console, enter **SQS** and access the **Simple Queue Service**
+![](/images/3-1/01.png?width=50pc)
 
-3. In the create DB subnet group interface:
-   - **Name** fill in **`db-subnet-group`**
-   - **Description** fill in **`db-subnet-group`**
-   - **VPC** choose **my-vpc**
-![](images/3-1/03.png?width=50pc)
+2. In the **Amazon SQS** interface, select **Create queue**
+![](/images/3-1/02.png?width=50pc)
 
-4. In the Add subnets section:
-   - **AZ** choose **ap-southeast-1a** and **ap-southeast-1b**
-   - **Subnets** choose **Private DB Subnet 1** and **Private DB Subnet 2** (you can go back to the list of subnets, see the CIDR of each subnet to choose the right one)
-   - Then click **Create**
-![](images/3-1/04.png?width=50pc)
+3. In the create queue interface:
+   - Type select **Standard**
+   - Name enter: **`OrderingQueue1`**
+   - Scroll down and click **Create queue**
+![](/images/3-1/03.png?width=50pc)
 
-5. Complete creating Subnet group.
-![](images/3-1/05.png?width=50pc)
+4. Complete SQS creation.
+![](/images/3-1/04.png?width=50pc)

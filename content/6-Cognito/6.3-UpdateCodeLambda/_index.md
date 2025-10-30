@@ -1,51 +1,193 @@
 ---
-title : "Connect to EC2 instance"
-date : "2024-10-27"
+title : "Update Lambda code to use token"
+date :  "2024-10-27" 
 weight : 3
 chapter : false
 pre : " <b> 6.3 </b> "
 ---
 
-#### Connect to EC2 instance
-1. Similar to connecting to the app server instance, we connect through **Session manager**.
-![](images/6-4/01.png?width=50pc)
+#### Objective
+- When Cognito allows a request to pass through, it will "attach" user information (like userId, email...) to the request. We will update the Lambda code to read userId from this secure information, instead of reading from the body (which can be forged).
 
-2. Switch to ec2-user.
-![](images/6-4/02.png?width=50pc)
+#### Practice
 
-3. Check the connection by pinging the ip of the Google DNS server → connected to the internet through IGW.
-![](images/6-4/03.png?width=50pc)
+1. Access Lambda service, update BasketFunction1 code and deploy
 
-4. Download **NPM** to the instance:
-    - **`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash`**
-    - **`source ~/.bashrc`** to reload the bash shell configuration file to apply the npm just downloaded
-![](images/6-4/04.png?width=50pc)
-    - Run **`nvm install 16`** then run **`nvm use 16`** to download and use **Node.js version 16**
-![](images/6-4/05.png?width=50pc)
+```js
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { EventBridgeClient, PutEventsCommand } from "@aws-sdk/client-eventbridge";
 
-5. To copy code from the **library-app-fe** folder from the **S3 bucket** we run the following commands:
-    - **`cd`** to go to the **user’s home directory**
-    - **`aws s3 cp s3://demowebapp-workshop-01/library-app-fe/ web-tier --recursive`** to copy all files from the library-app-fe folder and its sub-folders to the web-tier folder on the instance (if the web-tier folder does not exist, the instance will automatically create a new folder)
-![](images/6-4/06.png?width=50pc)
+const ddbClient = new DynamoDBClient({});
+const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
+const ebClient = new EventBridgeClient({});
 
-6. Download the dependencies:
-    - **`cd web-tier`** to access the folder
-    - **`ls -ltr`** to list the files and sub-folders of web-tier
-![](images/6-4/07.png?width=50pc)
-    - **`npm install`** to download the necessary libraries or dependencies
-![](images/6-4/08.png?width=50pc)
-![](images/6-4/09.png?width=50pc)
-    - **`npm run build`** to build the source code
-![](images/6-4/10.png?width=50pc)
-    - **`sudo amazon-linux-extras install nginx1 -y`** to download nginx (nginx acts as a web server to help the app run on port 80, as well as help direct API calls to the internal load balancer)
-7. Config Nginx:
-    - **`cd /etc/nginx`**
-    - **`ls`**
-    - We will see the **nginx.conf** file in the nginx folder. We need to **delete** this file and **replace** it with the file we have configured and uploaded to the s3 bucket.
-![](images/6-4/11.png?width=50pc)
-    - **`sudo rm nginx.conf`**
-    - **`sudo aws s3 cp s3://demowebapp-workshop-01/nginx.conf .`** to copy the file from the bucket to the nginx folder
-![](images/6-4/12.png?width=50pc)
-    - **`sudo service nginx restart`** to restart Nginx
-    - **`chmod -R 755 /home/ec2-user`** to grant Nginx access to all files
-    - **`sudo chkconfig nginx on`** to run the Nginx service automatically every time the instance restarts
+const basketTable = "BasketTable";
+
+export const handler = async (event) => {
+    console.log("Event received:", JSON.stringify(event));
+
+    const { httpMethod, path, body } = event;
+    let responseBody;
+    let statusCode = 200;
+
+    // --- NEW LOGIC: GET userId FROM TOKEN ---
+    // When using Cognito Authorizer, user information will be here
+    // "sub" (subject) is the unique userId from Cognito
+    const userId = event.requestContext?.authorizer?.claims?.sub;
+
+    if (!userId) {
+        return { statusCode: 401, body: JSON.stringify({ message: "Unauthorized - No user ID found in token." }) };
+    }
+    // ----------------------------------------
+
+    try {
+        if (httpMethod === "POST" && path.includes("/checkout")) {
+            console.log(`Processing checkout for user: ${userId}`);
+            const basketData = JSON.parse(body || '{}');
+
+            const eventDetail = {
+                ...basketData,
+                userId: userId // Override userId with userId from token
+            };
+
+            const eventParams = {
+                Entries: [
+                    {
+                        Source: "com.ecommerce.basket",
+                        DetailType: "CheckoutEvent",
+                        Detail: JSON.stringify(eventDetail),
+                        EventBusName: "default"
+                    },
+                ],
+            };
+            await ebClient.send(new PutEventsCommand(eventParams));
+            responseBody = { message: "Checkout processing started", eventData: eventDetail };
+
+        } else if (httpMethod === "POST" && path.includes("/basket")) {
+            const basketData = JSON.parse(body || '{}');
+
+            const params = {
+                TableName: basketTable,
+                Item: {
+                    ...basketData,
+                    userId: userId // Override userId with userId from token
+                }
+            };
+            await ddbDocClient.send(new PutCommand(params));
+            responseBody = { message: "Basket updated", basket: params.Item };
+
+        } else {
+            statusCode = 400;
+            responseBody = { message: "Unsupported method or path" };
+        }
+
+    } catch (err) {
+        console.error(err);
+        statusCode = 500;
+        responseBody = { message: "Internal server error", error: err.message };
+    }
+
+    return {
+        statusCode: statusCode,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(responseBody),
+    };
+};
+```
+
+2. Update OrderingFunction1 code and deploy
+```js
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, PutCommand, ScanCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { randomUUID } from "crypto";
+
+const ddbClient = new DynamoDBClient({});
+const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
+
+const orderTable = "OrderingTable";
+const indexName = "UserOrdersIndex";
+
+export const handler = async (event) => {
+    console.log("Event received:", JSON.stringify(event));
+
+    if (event.Records) {
+        console.log("Processing SQS message...");
+        try {
+            for (const record of event.Records) {
+                const sqsBody = JSON.parse(record.body);
+                const checkoutEventData = sqsBody.detail; 
+                console.log("Checkout data from SQS:", checkoutEventData);
+
+                const orderId = randomUUID();
+                const orderParams = {
+                    TableName: orderTable,
+                    Item: {
+                        orderId: orderId,
+                        userId: checkoutEventData.userId,
+                        items: checkoutEventData.items,
+                        status: "PENDING",
+                        createdAt: new Date().toISOString()
+                    }
+                };
+                await ddbDocClient.send(new PutCommand(orderParams));
+                console.log(`Order ${orderId} saved successfully.`);
+            }
+            return { message: "SQS messages processed successfully." };
+
+        } catch (err) {
+            console.error("Error processing SQS message:", err);
+            throw err; 
+        }
+    } 
+
+    // ----- PROCESS API GATEWAY -----
+    else if (event.httpMethod) {
+        console.log("Processing API Gateway request...");
+
+        const userIdFromToken = event.requestContext?.authorizer?.claims?.sub;
+        if (!userIdFromToken) {
+            return { statusCode: 401, body: JSON.stringify({ message: "Unauthorized - No user ID found in token." }) };
+        }
+        // ----------------------------------------
+
+        if (event.httpMethod === "GET") {
+            let responseBody;
+            try {
+                // --- NEW LOGIC: Prioritize userId from token ---
+                // We don't allow this user to see other users' orders
+                console.log(`Querying orders for authenticated user: ${userIdFromToken} using GSI`);
+
+                const params = {
+                    TableName: orderTable,
+                    IndexName: indexName,
+                    KeyConditionExpression: "userId = :uid",
+                    ExpressionAttributeValues: {
+                        ":uid": userIdFromToken // ONLY use userId from token
+                    }
+                };
+                const { Items } = await ddbDocClient.send(new QueryCommand(params));
+                responseBody = Items;
+
+                return {
+                    statusCode: 200,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(responseBody)
+                };
+            } catch (err) {
+                 console.error(err);
+                 return {
+                    statusCode: 500,
+                    body: JSON.stringify({ message: "Internal server error", error: err.message })
+                 };
+            }
+        }
+    }
+
+    console.warn("Unknown event type");
+    return {
+        statusCode: 400,
+        body: JSON.stringify({ message: "Unsupported event source" })
+    };
+};
+```

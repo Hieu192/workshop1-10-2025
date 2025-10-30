@@ -6,9 +6,7 @@ chapter : false
 pre : " <b> 2. </b> "
 ---
 
-# Preparation Steps
-
-In this section, we will prepare the necessary AWS resources for our serverless microservice application.
+In this section, we will prepare the necessary AWS resources for the serverless microservice application.
 
 #### Content
 
